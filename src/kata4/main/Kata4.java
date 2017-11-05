@@ -14,17 +14,37 @@ import kata4.view.MailListReader;
  */
 public class Kata4 {
 
-    public static void main(String[] args) throws IOException {
-        String filename = "F:/Orlando Daniel/Documentos/NetBeansProjects/Kata4/emails.txt";
+    public static void main(String[] args) throws Exception {
+        Kata4 inicializacion = new Kata4();
+        inicializacion.execute();
         
-        List<Mail> mailList = MailListReader.read(filename); 
+    }
+    
+    //VARIABLES
+    private final String filename = "F:/Orlando Daniel/Documentos/NetBeansProjects/Kata4/emails.txt";
+    private List<Mail> mailList; 
+    private Histogram<String> histogram; 
+    private HistogramDisplay histoDisplay; 
+    
+    private void execute() throws Exception{
+        input();
+        process();
+        output(); 
+            
+    }
+
+    private void input() throws IOException {
+        mailList = MailListReader.read(filename); 
         
-        Histogram<String> histogram = MailHistogramBuilder.build(mailList);
-        
-        HistogramDisplay histoDisplay = new HistogramDisplay(histogram); 
-        
-        histoDisplay.execute(); 
-                
+    }
+
+    private void process() {
+        histogram = MailHistogramBuilder.build(mailList);
+    }
+
+    private void output() {
+        histoDisplay = new HistogramDisplay(histogram);
+        histoDisplay.execute();
     }
     
     
